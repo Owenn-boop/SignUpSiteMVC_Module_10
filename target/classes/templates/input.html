@@ -3,12 +3,30 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert New User</title>
+	<script>
+		function validateInput() {
+			const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+			
+			console.log(document.querySelector("#password").value.length);
+			if(document.querySelector("#password").value.length < 6) {
+				console.log(document.querySelector("#password").value);
+				window.alert("Password too short!");
+				return false;
+			}
+			
+			if(!document.querySelector("#email").value.match(validRegex)) {
+				window.alert("Invalid email.");
+				return false;
+			}
+			return true;
+		}
+	</script>
 </head>
 
 <body>
-	<form th:object="${newUser}" th:action="@{/update/{id}(id=${newUser.id})}" method=POST>
-		Email: <input name="email" size="20" th:field="*{email}"><br />
-		Password: <input name="password" size="20" th:field="*{password}"><br />
+	<form onsubmit="return validateInput()" th:object="${newUser}" th:action="@{/update/{id}(id=${newUser.id})}" method=POST>
+		Email: <input id="email" name="email" size="20" th:field="*{email}"><br />
+		Password: <input id="password" name="password" size="20" th:field="*{password}"><br />
 		<input name="submit" type="submit" value="submit" />
 	</form>
 	<!-- goes back a directory in case the current url is at /edit/x -->
