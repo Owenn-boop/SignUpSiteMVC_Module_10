@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert New User</title>
+</head>
+
+<body>
+	<form th:object="${newUser}" th:action="@{/update/{id}(id=${newUser.id})}" method=POST>
+		Email: <input name="email" size="20" th:field="*{email}"><br />
+		Password: <input name="password" size="20" th:field="*{password}"><br />
+		<input name="submit" type="submit" value="submit" />
+	</form>
+	<!-- goes back a directory in case the current url is at /edit/x -->
+	<a href="../viewAll">View all Users</a>
+</body>
+
+</html>

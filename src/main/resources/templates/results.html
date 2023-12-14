@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>View All Users</title>
+</head>
+
+<body>
+	<form>
+		<table>
+			<tr th:each="currentUser : ${users}">
+				<td th:text="${currentUser.email}" />
+				<td th:text="${currentUser.password}" />
+				<td><a th:href="@{/edit/{id}(id=${currentUser.id})}">Edit</a></td>
+				<td><a th:href="@{/delete/{id}(id=${currentUser.id})}">Delete</a></td>
+			</tr>
+		</table>
+	</form>
+	<a href="../inputUser">Add a new user</a>
+</body>
+
+</html>
